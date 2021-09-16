@@ -29,46 +29,46 @@ docs.md
 **/.firebaserc
 
 .runtimeconfig.json
-.firebaseConfig.ts/
-/src/firebaseConfig.ts
-firebaseConfig.ts
-src\firebaseConfig.ts
-\src\firebaseConfig.ts
-\src\firebaseConfig.ts
-.firebase/
+# .firebaseConfig.ts/
+# /src/firebaseConfig.ts
+# firebaseConfig.ts
+# src\firebaseConfig.ts
+# \src\firebaseConfig.ts
+# \src\firebaseConfig.ts
+# .firebase/
 
-firebase
+# firebase
 
-firebase/
+# firebase/
 
-firebase/*
+# firebase/*
 
-/firebase/firebaseConfig.ts
+# /firebase/firebaseConfig.ts
 
-/src/firebaseConfig.ts
+# /src/firebaseConfig.ts
 
-src/firebaseConfig.ts
+# src/firebaseConfig.ts
 
-/src/firebase/*
+# /src/firebase/*
 
-firebaseConfig
+# firebaseConfig
 
-src/firebaseConfig
+# src/firebaseConfig
 
-/src/firebaseConfig.ts
+# /src/firebaseConfig.ts
 
-/src/firebaseConfig
+# /src/firebaseConfig
 
-/firebaseConfig.ts
+# /firebaseConfig.ts
 
-REACT\disney-clone\src\firebaseConfig.ts
+# REACT\disney-clone\src\firebaseConfig.ts
 
-F:\Projects\REACT\disney-clone\src\firebaseConfig.ts
+# F:\Projects\REACT\disney-clone\src\firebaseConfig.ts
 
-REACT/disney-clone/src/firebaseConfig.ts
+# REACT/disney-clone/src/firebaseConfig.ts
 
-F:/Projects/REACT/disney-clone/src/firebaseConfig.ts
+# F:/Projects/REACT/disney-clone/src/firebaseConfig.ts
 
-/src/firebaseConfig.ts
+# /src/firebaseConfig.ts
 
 .env

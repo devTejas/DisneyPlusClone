@@ -1,21 +1,18 @@
-import firebase from "firebase";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setUserLoginDetails } from "../features/user/userSlice";
-import { auth, provider } from "../firebaseConfig";
+import { provider } from "../firebaseConfig";
+import firebase from "firebase";
 
 const Login = () => {
   const dispatch = useDispatch();
 
   const handleGoogleLogin = () => {
-    auth
+    firebase
+      .auth()
       .signInWithPopup(provider)
       .then((result: any) => {
-        console.log(result.user.displayName);
-        console.log(result.user.email);
-        console.log(result.user.photoURL);
-
         setUserToStore(result.user);
       })
       .catch((error: any) => {
@@ -31,7 +28,6 @@ const Login = () => {
   };
 
   const setUserToStore = (user: userType | any) => {
-    console.log(user);
     dispatch(
       setUserLoginDetails({
         name: user.displayName ?? user.name,
@@ -40,17 +36,15 @@ const Login = () => {
       })
     );
   };
+  
   // signup
   const createUser = (email: string, password: string, name: string) => {
-    console.log("We are create!");
-
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // Signed in
         let user = userCredential.user;
-        console.log(user?.displayName, user?.email, user?.photoURL);
         setUserToStore({ ...user, name });
       })
       .catch((error) => {
@@ -62,15 +56,12 @@ const Login = () => {
 
   // signin
   const signInUser = (email: any, password: any) => {
-    console.log("We are signin!");
-
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // Signed in
         let user = userCredential.user;
-        console.log(user?.displayName, user?.email, user?.photoURL);
         setUserToStore(user);
       })
       .catch((error) => {
@@ -79,18 +70,6 @@ const Login = () => {
         console.log(errorCode, errorMessage);
       });
   };
-
-  // const signOut = () => {
-  //   firebase
-  //     .auth()
-  //     .signOut()
-  //     .then(() => {
-  //       // Sign-out successful.
-  //     })
-  //     .catch((error) => {
-  //       // An error happened.
-  //     });
-  // };
 
   const [signin, setSignin] = useState(true);
 
@@ -114,8 +93,6 @@ const Login = () => {
 
   const handleAuth = (e: any) => {
     e.preventDefault();
-    console.log("hit!");
-
     signin
       ? signInUser(user.email, user.password)
       : createUser(user.email, user.password, user.name);

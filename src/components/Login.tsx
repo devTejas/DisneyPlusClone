@@ -7,6 +7,7 @@ import firebase from "firebase";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
 
   const handleGoogleLogin = () => {
     firebase
@@ -17,6 +18,7 @@ const Login = () => {
       })
       .catch((error: any) => {
         console.log(error);
+        setError("Don't close the popup without Signing in!");
       });
   };
 
@@ -36,7 +38,7 @@ const Login = () => {
       })
     );
   };
-  
+
   // signup
   const createUser = (email: string, password: string, name: string) => {
     firebase
@@ -51,6 +53,7 @@ const Login = () => {
         let errorCode = error.code;
         let errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        setError(errorMessage);
       });
   };
 
@@ -68,6 +71,11 @@ const Login = () => {
         let errorCode = error.code;
         let errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        errorMessage =
+          `${password}`.length < 6
+            ? "Password cannot be less than 6 characters!"
+            : "Password is invalid!";
+        setError(errorMessage);
       });
   };
 
@@ -82,6 +90,7 @@ const Login = () => {
   const [samePassword, setSamePassword] = useState(true);
 
   const checkPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setError("");
     if (user.password !== event?.currentTarget?.value) setSamePassword(false);
     else setSamePassword(true);
   };
@@ -160,15 +169,16 @@ const Login = () => {
             *
           </div>
         )}
-        {!samePassword && user.password && (
-          <p>PASSWORD & CONFIRM PASSWORD ARE NOT SAME!</p>
-        )}
         {/* if user wants to signin, then variable signin is false(default) so it must be used as !signin */}
         <StyledButton type="submit">
           {signin ? `SIGN IN` : `SIGN UP`}
         </StyledButton>
+        {!samePassword && user.password && (
+          <p>PASSWORD & CONFIRM PASSWORD ARE NOT SAME!</p>
+        )}
+        {error && <p>{error}</p>}
         <p>
-          *ALL FIELDS ARE REQUIRED!
+          * ALL FIELDS ARE REQUIRED!
           <br /> For a demo👇
           <br /> Email - user@test.com
           <br /> Password - testuser
